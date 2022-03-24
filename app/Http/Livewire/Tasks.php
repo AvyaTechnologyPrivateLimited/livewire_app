@@ -3,11 +3,11 @@
 namespace App\Http\Livewire;
   
 use Livewire\Component;
-use App\Models\Post;
+use App\Models\Task;
   
-class Posts extends Component
+class Tasks extends Component
 {
-    public $posts, $title, $body, $post_id;
+    public $tasks, $title, $description, $task_id;
     public $isOpen = 0;
   
     /**
@@ -17,8 +17,8 @@ class Posts extends Component
      */
     public function render()
     {
-        $this->posts = Post::all();
-        return view('livewire.posts');
+        $this->tasks = Task::all();
+        return view('livewire.tasks');
     }
   
     /**
@@ -59,8 +59,8 @@ class Posts extends Component
      */
     private function resetInputFields(){
         $this->title = '';
-        $this->body = '';
-        $this->post_id = '';
+        $this->description = '';
+        $this->task_id = '';
     }
      
     /**
@@ -72,16 +72,16 @@ class Posts extends Component
     {
         $this->validate([
             'title' => 'required',
-            'body' => 'required',
+            'description' => 'required',
         ]);
    
-        Post::updateOrCreate(['id' => $this->post_id], [
+        Task::updateOrCreate(['id' => $this->task_id], [
             'title' => $this->title,
-            'body' => $this->body
+            'description' => $this->description
         ]);
   
         session()->flash('message', 
-            $this->post_id ? 'Post Updated Successfully.' : 'Post Created Successfully.');
+            $this->task_id ? 'Task Updated Successfully.' : 'Task Created Successfully.');
   
         $this->closeModal();
         $this->resetInputFields();
@@ -94,10 +94,10 @@ class Posts extends Component
      */
     public function edit($id)
     {
-        $post = Post::findOrFail($id);
-        $this->post_id = $id;
-        $this->title = $post->title;
-        $this->body = $post->body;
+        $task = Task::findOrFail($id);
+        $this->task_id = $id;
+        $this->title = $task->title;
+        $this->description = $task->description;
     
         $this->openModal();
     }
@@ -109,7 +109,7 @@ class Posts extends Component
      */
     public function delete($id)
     {
-        Post::find($id)->delete();
-        session()->flash('message', 'Post Deleted Successfully.');
+        Task::find($id)->delete();
+        session()->flash('message', 'Task Deleted Successfully.');
     }
 }

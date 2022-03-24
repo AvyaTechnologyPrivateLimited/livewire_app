@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\Posts;
+use App\Http\Livewire\Tasks;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +22,11 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('posts', Posts::class)->middleware('auth');
+Route::group(['middleware'=>'auth'], function(){
+    
+    //protected routes
+    Route::group(['prefix'=>'task', 'as'=>'task'], function(){
+        Route::get('/', Tasks::class);
+    });
+
+});
