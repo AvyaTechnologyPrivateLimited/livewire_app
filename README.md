@@ -75,4 +75,4 @@ Step 3.
 run command: php artisan optimize
 
 Step4.
-run command php artisan migrate
+run command php artisan migrate 
