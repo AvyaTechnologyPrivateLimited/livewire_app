@@ -1,6 +1,6 @@
 <?php
   
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Task;
   
 use Livewire\Component;
 use App\Models\Task;
@@ -18,7 +18,7 @@ class Tasks extends Component
     public function render()
     {
         $this->tasks = Task::all();
-        return view('livewire.tasks');
+        return view('livewire.task.tasks');
     }
   
     /**
@@ -58,9 +58,10 @@ class Tasks extends Component
      * @var array
      */
     private function resetInputFields(){
+        $this->task_id = '';
         $this->title = '';
         $this->description = '';
-        $this->task_id = '';
+        $this->no_of_images = '';
     }
      
     /**
@@ -73,11 +74,13 @@ class Tasks extends Component
         $this->validate([
             'title' => 'required',
             'description' => 'required',
+            'no_of_images' => 'required|numeric',
         ]);
    
         Task::updateOrCreate(['id' => $this->task_id], [
             'title' => $this->title,
-            'description' => $this->description
+            'description' => $this->description,
+            'no_of_images' => $this->no_of_images
         ]);
   
         session()->flash('message', 
@@ -98,6 +101,7 @@ class Tasks extends Component
         $this->task_id = $id;
         $this->title = $task->title;
         $this->description = $task->description;
+        $this->no_of_images = $task->no_of_images;
     
         $this->openModal();
     }

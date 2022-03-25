@@ -1,7 +1,8 @@
 <?php
 
+
+use App\Http\Livewire\Task\Tasks;
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\Tasks;
 
 /*
 |--------------------------------------------------------------------------

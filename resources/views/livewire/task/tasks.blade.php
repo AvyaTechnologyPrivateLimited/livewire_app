@@ -17,7 +17,7 @@
             @endif
             <button wire:click="create()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3">Create New Task</button>
             @if($isOpen)
-                @include('livewire.create')
+                @include('livewire.task.create')
             @endif
             <table class="table-fixed w-full">
                 <thead>
@@ -25,6 +25,7 @@
                         <th class="px-4 py-2 w-20">No.</th>
                         <th class="px-4 py-2">Title</th>
                         <th class="px-4 py-2">Description</th>
+                        <th class="px-4 py-2">No of Images</th>
                         <th class="px-4 py-2">Action</th>
                     </tr>
                 </thead>
@@ -34,6 +35,7 @@
                         <td class="border px-4 py-2">{{ $task->id }}</td>
                         <td class="border px-4 py-2">{{ $task->title }}</td>
                         <td class="border px-4 py-2">{{ $task->description }}</td>
+                        <td class="border px-4 py-2">{{ $task->no_of_images }}</td>
                         <td class="border px-4 py-2">
                         <button wire:click="edit({{ $task->id }})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</button>
                             <button wire:click="delete({{ $task->id }})" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
