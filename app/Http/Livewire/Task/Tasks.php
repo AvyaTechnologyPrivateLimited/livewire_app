@@ -1,15 +1,27 @@
 <?php
   
 namespace App\Http\Livewire\Task;
-  
+
 use Livewire\Component;
 use App\Models\Task;
   
 class Tasks extends Component
 {
-    public $tasks, $title, $description, $task_id;
+    public $tasks;
+    public $title;
+    public $description;
+    public $task_id;
+    public $no_of_images;
     public $isOpen = 0;
   
+    protected function rules()
+    {
+        return [
+            'title' => 'required',
+            'description' => 'required',
+            'no_of_images' => 'required|numeric',
+        ];
+    }
     /**
      * The attributes that are mass assignable.
      *
@@ -57,7 +69,8 @@ class Tasks extends Component
      *
      * @var array
      */
-    private function resetInputFields(){
+    private function resetInputFields()
+    {
         $this->task_id = '';
         $this->title = '';
         $this->description = '';
@@ -71,11 +84,7 @@ class Tasks extends Component
      */
     public function store()
     {
-        $this->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'no_of_images' => 'required|numeric',
-        ]);
+        $this->validate();
    
         Task::updateOrCreate(['id' => $this->task_id], [
             'title' => $this->title,
@@ -83,8 +92,10 @@ class Tasks extends Component
             'no_of_images' => $this->no_of_images
         ]);
   
-        session()->flash('message', 
-            $this->task_id ? 'Task Updated Successfully.' : 'Task Created Successfully.');
+        session()->flash(
+            'message',
+            $this->task_id ? 'Task Updated Successfully.' : 'Task Created Successfully.'
+        );
   
         $this->closeModal();
         $this->resetInputFields();
