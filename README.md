@@ -76,3 +76,18 @@ run command: php artisan optimize
 
 Step4.
 run command php artisan migrate 
+
+## Role and Permission
+Step 1.
+run command: composer require spatie/laravel-permission
+
+Step 2.
+config/app.php
+'providers' => [
+    ....
+    Spatie\Permission\PermissionServiceProvider::class,
+],
+
+Run command:
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+
