@@ -91,3 +91,16 @@ config/app.php
 Run command:
 php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
 
+## Seed fake db for testing
+- 1. PermissionTableSeeder: this seeder will create permissions.
+-- php artisan db:seed --class=PermissionTableSeeder
+
+- 2. CreateAdminSeeder: this seeder will create admin and password
+-- php artisan db:seed --class=CreateAdminSeeder
+Admin: chandan@example.com
+Pwd: 123456789
+
+- 3. CreateStaffSeeder: this seeder will create staff and password
+-- php artisan db:seed --class=CreateStaffSeeder
+Admin: staff1@example.com
+Pwd: 123456789
