@@ -91,7 +91,7 @@ config/app.php
 Run command:
 php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
 
-## Seed fake db for testing
+## Seed fake data for testing
 - 1. PermissionTableSeeder: this seeder will create permissions.
 -- php artisan db:seed --class=PermissionTableSeeder
 
