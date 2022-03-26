@@ -15,7 +15,9 @@
                   </div>
                 </div>
             @endif
+            @can('task-create')
             <button wire:click="create()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3">Create New Task</button>
+            @endcan
             @if($isOpen)
                 @include('livewire.task.create')
             @endif
@@ -37,8 +39,12 @@
                         <td class="border px-4 py-2">{{ $task->description }}</td>
                         <td class="border px-4 py-2">{{ $task->no_of_images }}</td>
                         <td class="border px-4 py-2">
+                        @can('task-edit')
                         <button wire:click="edit({{ $task->id }})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</button>
-                            <button wire:click="delete({{ $task->id }})" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
+                        @endcan
+                        @can('task-delete')
+                        <button wire:click="delete({{ $task->id }})" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
+                        @endcan
                         </td>
                     </tr>
                     @endforeach
