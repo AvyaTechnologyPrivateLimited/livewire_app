@@ -18,20 +18,20 @@ use Spatie\Permission\Models\Permission;
 */
 
 Route::get('/', function () {
-    $role = Role::create(['name' => 'Admin']);
-    $role->syncPermissions(['task-list', 'task-edit', 'task-create', 'task-delete']);
-    die;
-    $role = Role::find(1);
-    $role->syncPermissions('task-list');
+    // $role = Role::create(['name' => 'Admin']);
+    // $role->syncPermissions(['task-list', 'task-edit', 'task-create', 'task-delete']);
+    // die;
+    // $role = Role::find(1);
+    // $role->syncPermissions('task-list');
 
-    die;
-    $role = Role::find(1);
-    $user = \App\Models\User::find(1);
+    // die;
+    // $role = Role::find(1);
+    // $user = \App\Models\User::find(1);
 
-    $permissions = Permission::pluck('id','id')->all();
-    $role->syncPermissions($permissions);
+    // $permissions = Permission::pluck('id','id')->all();
+    // $role->syncPermissions($permissions);
 
-    $user->assignRole([1]);
+    // $user->assignRole([1]);
 
     return view('welcome');
 });
