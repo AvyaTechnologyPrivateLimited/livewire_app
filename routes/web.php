@@ -2,8 +2,9 @@
 
 
 use App\Http\Livewire\Task\Tasks;
-use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\User\Staff;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Permission;
 
 /*
@@ -45,6 +46,10 @@ Route::group(['middleware'=>'auth'], function(){
     //protected routes
     Route::group(['prefix'=>'task', 'as'=>'task'], function(){
         Route::get('/', Tasks::class);
+    });
+
+    Route::group(['prefix'=>'staff', 'as'=>'staff'], function(){
+        Route::get('/', Staff::class);
     });
 
 });
