@@ -2,10 +2,8 @@
 
 
 use App\Http\Livewire\Task\Tasks;
-use App\Http\Livewire\User\Staff;
-use Spatie\Permission\Models\Role;
+use App\Http\Livewire\User\Staffs;
 use Illuminate\Support\Facades\Route;
-use Spatie\Permission\Models\Permission;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,21 +17,6 @@ use Spatie\Permission\Models\Permission;
 */
 
 Route::get('/', function () {
-    // $role = Role::create(['name' => 'Admin']);
-    // $role->syncPermissions(['task-list', 'task-edit', 'task-create', 'task-delete']);
-    // die;
-    // $role = Role::find(1);
-    // $role->syncPermissions('task-list');
-
-    // die;
-    // $role = Role::find(1);
-    // $user = \App\Models\User::find(1);
-
-    // $permissions = Permission::pluck('id','id')->all();
-    // $role->syncPermissions($permissions);
-
-    // $user->assignRole([1]);
-
     return view('welcome');
 });
 
@@ -49,7 +32,7 @@ Route::group(['middleware'=>'auth'], function(){
     });
 
     Route::group(['prefix'=>'staff', 'as'=>'staff'], function(){
-        Route::get('/', Staff::class);
+        Route::get('/', Staffs::class);
     });
 
 });
