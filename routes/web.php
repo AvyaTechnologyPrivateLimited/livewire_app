@@ -4,6 +4,7 @@
 use App\Http\Livewire\Task\Tasks;
 use App\Http\Livewire\User\Staffs;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StoryBlocksApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,4 +36,5 @@ Route::group(['middleware'=>'auth'], function(){
         Route::get('/', Staffs::class);
     });
 
+    Route::get('/search-image', [StoryBlocksApiController::class, 'searchImage']);
 });
