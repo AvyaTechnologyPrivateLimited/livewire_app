@@ -2,8 +2,10 @@
   
 namespace App\Http\Livewire\Task;
 
-use Livewire\Component;
 use App\Models\Task;
+use Livewire\Component;
+use App\Models\UserTask;
+use Illuminate\Support\Facades\Auth;
   
 class Tasks extends Component
 {
@@ -29,7 +31,9 @@ class Tasks extends Component
      */
     public function render()
     {
-        $this->tasks = Task::all();
+        // echo "<pre>";
+        $this->tasks = Task::with('taskUsers')->get();
+        // print_r($this->tasks[0]->taskUsers);die;
         return view('livewire.task.tasks');
     }
   
@@ -126,5 +130,23 @@ class Tasks extends Component
     {
         Task::find($id)->delete();
         session()->flash('message', 'Task Deleted Successfully.');
+    }
+
+    /**
+     * 
+     */
+    public function picktask($id){
+        if($id){
+            $count = UserTask::where('user_id', Auth::user()->id)->where('task_id', $id)->count();
+            if($count){
+                session()->flash('message', 'Task Already Picked By You.');
+            }else{
+                $userTask = new UserTask;
+                $userTask->user_id = Auth::user()->id;
+                $userTask->task_id = $id;
+                $userTask->save();
+                session()->flash('message', 'Task Picked Successfully.');
+            }
+        }
     }
 }

@@ -12,4 +12,9 @@ class Task extends Model
     protected $fillable = [
         'title', 'description', 'no_of_images'
     ];
+
+    public function taskUsers()
+    {
+        return $this->hasMany('App\Models\UserTask');
+    }
 }
