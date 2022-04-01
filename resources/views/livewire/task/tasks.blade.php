@@ -46,7 +46,14 @@
                                 <button wire:click="delete({{ $task->id }})" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
                             @endcan
                             @if (Auth::user()->user_type == 'staff')
-                                <button wire:click="picktask({{ $task->id }})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Pick Task</button>
+                                @if (chkStaffTask($task->id) == 1)
+                                    <button wire:click="searchPhoto({{ $task->id }})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Search Photo</button>
+                                @elseif(chkStaffTask($task->id) == 2)
+                                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Already Picked</button>
+                                @else
+                                    <button wire:click="picktask({{ $task->id }})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Pick Task</button>
+                                @endif
+                                
                             @endif
                         </td>
                     </tr>
