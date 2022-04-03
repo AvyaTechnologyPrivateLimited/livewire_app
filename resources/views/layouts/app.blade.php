@@ -41,7 +41,7 @@
                 {{ $slot }}
             </main>
         </div>
-
+        <livewire:search-photo-model />
         @stack('modals')
 
         @livewireScripts

@@ -12,7 +12,7 @@ class StoryBlocksApiController extends Controller
     public function searchImage(Request $request){
 
         $urlParamsArr = [];
-        $urlParamsArr['keywords'] = 'wildlife';
+        $urlParamsArr['keywords'] = isset($request->keyword) ? $request->keyword : 'wildlife';
         $response = $this->storyBlocksRequest($urlParamsArr);
 
         return $response;
