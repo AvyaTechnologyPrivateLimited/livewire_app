@@ -6,6 +6,12 @@
 					<div class="">
 						<div class="mb-4">
 							<label for="keyword" class="block text-gray-700 text-sm font-bold mb-2">Keyword</label>
+                            @php
+                            // $taskArr = json_decode($task, true);
+                            // echo $task_id = isset($taskArr['id']) ? $taskArr['id'] : '';
+                            // echo "<input type='text' name='task_id' id='task_id' value='".$task_id."'  wire:model='task_id'>";
+                            @endphp
+                            
 							<input type="text"
 								class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 								id="keyword" placeholder="Enter Keyword" wire:model="keyword">

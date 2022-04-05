@@ -2,18 +2,23 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Task;
 use Livewire\Component;
+use App\Models\SearchedPhoto;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\StoryBlocksApiController;
 
 class SearchPhotoModel extends Component
 {
     public $show = false;
-    public $task_id = null;
+    public $task;
+    public $task_id;
     public $keyword;
     public $photosArr;
 
-    public function show(){
+    public function show(Task $task){
         $this->show = true;
+        $this->task = $task;
     }
 
     protected $listeners = [
@@ -37,7 +42,9 @@ class SearchPhotoModel extends Component
 
     public function render()
     {
-        
+        $taskArr = json_decode($this->task, true);
+        $task_id = isset($taskArr['id']) ? $taskArr['id'] : '';
+        $this->task_id = $task_id;
         return view('livewire.search-photo-model', ['task_id' => $this->task_id]);
     }
 
@@ -47,13 +54,25 @@ class SearchPhotoModel extends Component
         ]);
 
         $keyword = $validatedData['keyword']; 
+        $task_id = $this->task_id;
         $photosArr = [];
         if($keyword != ""){
             $storyBlocksObj = new StoryBlocksApiController;
             $myRequest = new \Illuminate\Http\Request();
             $myRequest->setMethod('POST'); //default METHOD
             $myRequest->request->add(['keyword' => $keyword]);
+            $myRequest->request->add(['page' => 1]);
+            $myRequest->request->add(['results_per_page' => 10]);
             $this->photosArr = json_decode($storyBlocksObj->searchImage($myRequest), true);
+
+            if (!empty($this->photosArr)) {
+                foreach ($this->photosArr['response']['results'] as $val) {
+                    SearchedPhoto::updateOrInsert(
+                        ['user_id' => Auth::user()->id, 'task_id' => $task_id, 'photo_id' => $val['id']],
+                        ['title' => $val['title'], 'type' => $val['type'], 'thumbnail_url' => $val['thumbnail_url'], 'preview_url' => $val['preview_url'], 'is_new' => $val['is_new'], 'source' => 'StoryBlocks']
+                    );
+                }
+            }
         }
 
         // echo "<pre>";

@@ -47,7 +47,7 @@
                             @endcan
                             @if (Auth::user()->user_type == 'staff')
                                 @if (chkStaffTask($task->id) == 1)
-                                    <button x-data="{ task_id: {{ $task->id }} }" x-on:click="window.livewire.emitTo('search-photo-model', 'show')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                    <button x-data="{ task_id: {{ $task->id }} }" x-on:click="window.livewire.emitTo('search-photo-model', 'show', {{$task->id}})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                         Search Photo
                                     </button>
                                 @elseif(chkStaffTask($task->id) == 2)
