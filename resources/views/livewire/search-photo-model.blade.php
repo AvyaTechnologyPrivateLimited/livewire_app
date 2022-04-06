@@ -38,7 +38,7 @@
         </div>
         @if ($photosArr)
             
-        
+        <span class="text-green-600">Photos are saved in DB for Admin review</span>
         <table class="table-fixed w-full">
             <thead>
                 <tr class="bg-gray-100">
