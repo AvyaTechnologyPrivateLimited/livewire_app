@@ -20,9 +20,11 @@
                         {{ __('Task') }}
                     </x-jet-nav-link>
                     @endcan
+                    @can('staff-list')
                     <x-jet-nav-link href="{{ route('staff') }}" :active="request()->routeIs('staff')">
                         {{ __('Staff') }}
                     </x-jet-nav-link>
+                    @endcan
                 </div>
             </div>
 
