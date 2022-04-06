@@ -44,6 +44,12 @@
                             @endcan
                             @can('task-delete')
                                 <button wire:click="delete({{ $task->id }})" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
+                                @if(chkTaskHasPhoto($task->id))
+                                    <p>&nbsp;</p>
+                                    <button x-data="{ task_id: {{ $task->id }} }" x-on:click="window.livewire.emitTo('searched-photo-model', 'show', {{$task->id}})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                        Show Photos
+                                    </button>
+                                @endif
                             @endcan
                             @if (Auth::user()->user_type == 'staff')
                                 @if (chkStaffTask($task->id) == 1)

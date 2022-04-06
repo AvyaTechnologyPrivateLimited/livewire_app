@@ -42,6 +42,7 @@
             </main>
         </div>
         <livewire:search-photo-model />
+        <livewire:searched-photo-model />
         @stack('modals')
 
         @livewireScripts

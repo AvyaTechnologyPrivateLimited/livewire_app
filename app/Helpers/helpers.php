@@ -17,3 +17,14 @@ function chkStaffTask($task_id){
         }
     }
 }
+
+function chkTaskHasPhoto($task_id){
+    if($task_id){
+        $hasTask = DB::table('searched_photos')->where('task_id', $task_id)->count();
+        if($hasTask){
+            return true;
+        }else{
+            return false;
+        }
+    }
+}
