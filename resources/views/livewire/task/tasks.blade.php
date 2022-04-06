@@ -53,6 +53,14 @@
                                     </button>
                                 @endif
                             @endcan
+                            @can('task-complete')
+                            @if($task->task_status == 1)
+                                Completed  
+                            @else 
+                                <button wire:click="markComplete({{ $task->id }})" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Mark Completed</button>
+                            @endif
+                                
+                            @endcan
                             @if (Auth::user()->user_type == 'staff')
                                 @if (chkStaffTask($task->id) == 1)
                                     <button x-data="{ task_id: {{ $task->id }} }" x-on:click="window.livewire.emitTo('search-photo-model', 'show', {{$task->id}})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
@@ -61,7 +69,9 @@
                                 @elseif(chkStaffTask($task->id) == 2)
                                     <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Already Picked</button>
                                 @else
-                                    <button wire:click="picktask({{ $task->id }})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Pick Task</button>
+                                    @if(!chkStaffTaskStatus())
+                                        <button wire:click="picktask({{ $task->id }})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Pick Task</button>
+                                    @endif
                                 @endif
                                 
                             @endif

@@ -32,7 +32,7 @@ class Tasks extends Component
     public function render()
     {
         // echo "<pre>";
-        $this->tasks = Task::with('taskUsers')->get();
+        $this->tasks = Task::with('taskUsers')->withStatus()->get();
         // print_r($this->tasks[0]->taskUsers);die;
         return view('livewire.task.tasks');
     }
@@ -141,12 +141,25 @@ class Tasks extends Component
             if($count){
                 session()->flash('message', 'Task Already Picked By You.');
             }else{
+                $task = Task::find($id);
+                $task->task_status = 2;
+                $task->save();
+
                 $userTask = new UserTask;
                 $userTask->user_id = Auth::user()->id;
                 $userTask->task_id = $id;
                 $userTask->save();
                 session()->flash('message', 'Task Picked Successfully.');
             }
+        }
+    }
+
+    public function markComplete($id){
+        if($id){
+            $task = Task::find($id);
+            $task->task_status = 1;
+            $task->save();
+            session()->flash('message', 'Task Completed Successfully.');
         }
     }
 }

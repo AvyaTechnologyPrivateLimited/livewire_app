@@ -28,3 +28,17 @@ function chkTaskHasPhoto($task_id){
         }
     }
 }
+
+function chkStaffTaskStatus(){
+    $hasPendingTask = DB::table('user_tasks')
+        ->where('user_tasks.user_id', Auth::user()->id)
+        ->join('tasks', function ($join) {
+            $join->on('user_tasks.task_id', '=', 'tasks.id')
+                 ->where('tasks.task_status', '!=', 1);
+        })
+        ->count();
+    if($hasPendingTask){
+        return true;
+    }
+    return false;
+}
