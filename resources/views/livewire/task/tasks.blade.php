@@ -57,6 +57,7 @@
                             @if($task->task_status == 1)
                                 Completed  
                             @else 
+                                <p>&nbsp;</p>
                                 <button wire:click="markComplete({{ $task->id }})" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Mark Completed</button>
                             @endif
                                 
