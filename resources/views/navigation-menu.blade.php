@@ -25,6 +25,11 @@
                         {{ __('Staff') }}
                     </x-jet-nav-link>
                     @endcan
+                    @can('manage-settings')
+                    <x-jet-nav-link href="{{ route('setting') }}" :active="request()->routeIs('setting')">
+                        {{ __('Setting') }}
+                    </x-jet-nav-link>
+                    @endcan
                 </div>
             </div>
 
