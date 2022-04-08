@@ -16,14 +16,23 @@ class Settings extends Component
         ];
     }
 
-    public function render()
+    public function switchAddress()
     {
-        $this->settings = Setting::all();
+      return $this->photo_search_api;
+    }
+
+    public function mount(string $component = 'active')
+    {
+       $this->settings = Setting::all();
         foreach($this->settings as $setting){
             if($setting->setting_key == 'photo_search_api'){
-                // $this->photo_search_api = $setting->setting_val;
+                 $this->photo_search_api = $setting->setting_val;
             }
         }
+    }
+
+    public function render()
+    {
         return view('livewire.setting.settings');
     }
 

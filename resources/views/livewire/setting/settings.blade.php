@@ -28,9 +28,8 @@
                                 <div class="flex justify-center">
                                     <div>
                                         <div class="form-check">
-                                            <input @if ($photo_search_api == 'StoryBlocks')
-                                                @checked(true)
-                                            @endif
+                                            <input 
+                                            wire:change="switchAddress"
                                             class="" type="radio"
                                             wire:model="photo_search_api" name="photo_search_api" id="photo_search_api1"
                                             value="StoryBlocks">
@@ -40,9 +39,8 @@
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input @if ($photo_search_api == 'ShutterStock')
-                                                @checked(true)
-                                            @endif
+                                            <input 
+                                            wire:change="switchAddress"
                                             class="" type="radio"
                                             wire:model="photo_search_api" name="photo_search_api" id="photo_search_api2"
                                             value="ShutterStock">
