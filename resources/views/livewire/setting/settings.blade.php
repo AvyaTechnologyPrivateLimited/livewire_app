@@ -23,26 +23,39 @@
                         <div class="">
                             <div class="mb-4">
                                 <label for="exampleFormControlInput1"
-                                    class="block text-gray-700 text-sm font-bold mb-2">Select Photo Search Engine</label>
-                                    <div class="flex justify-center">
-                                        <div>
-                                          <div class="form-check">
-                                            <input class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="photo_search_api" id="photo_search_api1" checked>
-                                            <label class="form-check-label inline-block text-gray-800" for="photo_search_api1">
+                                    class="block text-gray-700 text-sm font-bold mb-2">Select Photo Search
+                                    Engine</label>
+                                <div class="flex justify-center">
+                                    <div>
+                                        <div class="form-check">
+                                            <input @if ($photo_search_api == 'StoryBlocks')
+                                                @checked(true)
+                                            @endif
+                                            class="" type="radio"
+                                            wire:model="photo_search_api" name="photo_search_api" id="photo_search_api1"
+                                            value="StoryBlocks">
+                                            <label class="form-check-label inline-block text-gray-800"
+                                                for="photo_search_api1">
                                                 StoryBlocks
                                             </label>
-                                          </div>
-                                          <div class="form-check">
-                                            <input class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="photo_search_api" id="photo_search_api2">
-                                            <label class="form-check-label inline-block text-gray-800" for="photo_search_api2">
+                                        </div>
+                                        <div class="form-check">
+                                            <input @if ($photo_search_api == 'ShutterStock')
+                                                @checked(true)
+                                            @endif
+                                            class="" type="radio"
+                                            wire:model="photo_search_api" name="photo_search_api" id="photo_search_api2"
+                                            value="ShutterStock">
+                                            <label class="form-check-label inline-block text-gray-800"
+                                                for="photo_search_api2">
                                                 ShutterStock
                                             </label>
-                                          </div>
                                         </div>
-                                      </div>
-                                @error('title') <span class="text-red-500">{{ $message }}</span>@enderror
+                                    </div>
+                                </div>
+                                @error('photo_search_api') <span class="text-red-500">{{ $message }}</span>@enderror
                             </div>
-                            
+
                         </div>
                     </div>
 

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Traits\ImageSearchTrait;
 
-class StoryBlocksApiController extends Controller
+class ShutterStockApiController extends Controller
 {
     use ImageSearchTrait;
 
@@ -13,8 +13,8 @@ class StoryBlocksApiController extends Controller
         if(empty($request->all())){
             return false;
         }
-        $urlParamsArr = (array)$request->all();        
-        $response = $this->storyBlocksRequest($urlParamsArr);
+        $urlParamsArr = (array)$request->all();
+        $response = $this->shutterStockResponse($urlParamsArr);
 
         return $response;
     }

@@ -74,4 +74,35 @@ trait ImageSearchTrait
 		 
 		return self::getStoryBlocksResponse($resource, $urlParams, $httpMethod);
 	}
+
+    public function shutterStockResponse(array $queryFields){
+        if(empty($queryFields)){
+            return false;
+        }
+
+        $shutterStockApiKey = Config::get('constants.shutterStock.SHUTTERSTOCK_KEY');
+        $shutterStockApisecret = Config::get('constants.shutterStock.SHUTTERSTOCK_SECRET');
+
+        // echo "<pre>";
+        // print_r($queryFields);
+        // die;
+
+        $options = [
+            CURLOPT_URL => "https://api.shutterstock.com/v2/images/search?" . http_build_query($queryFields),
+            CURLOPT_USERAGENT => "php/curl",
+            CURLOPT_HTTPAUTH => CURLAUTH_BASIC,
+            CURLOPT_USERPWD => "".$shutterStockApiKey.":".$shutterStockApisecret."",
+            CURLOPT_RETURNTRANSFER => 1
+        ];
+          
+        $handle = curl_init();
+        curl_setopt_array($handle, $options);
+        $response = curl_exec($handle);
+        curl_close($handle);
+          
+        $response = ['status' => 'success', 'response' => json_decode($response)];
+        return json_encode($response);
+        // $decodedResponse = json_decode($response);
+        // print_r($decodedResponse);
+    }
 }

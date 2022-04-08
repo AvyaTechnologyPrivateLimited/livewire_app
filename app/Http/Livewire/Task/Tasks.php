@@ -6,6 +6,7 @@ use App\Models\Task;
 use Livewire\Component;
 use App\Models\UserTask;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
   
 class Tasks extends Component
 {
@@ -15,6 +16,7 @@ class Tasks extends Component
     public $task_id;
     public $no_of_images;
     public $isOpen = 0;
+    public $photo_search_api;
   
     protected function rules()
     {
@@ -33,6 +35,7 @@ class Tasks extends Component
     {
         // echo "<pre>";
         $this->tasks = Task::with('taskUsers')->withStatus()->get();
+        $this->photo_search_api = Config::get('settings.photo_search_api');
         // print_r($this->tasks[0]->taskUsers);die;
         return view('livewire.task.tasks');
     }

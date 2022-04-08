@@ -18,11 +18,11 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->foreignId('task_id');
             $table->integer('photo_id');
-			$table->string('title');
+			$table->text('title');
 			$table->string('type');
 			$table->text('thumbnail_url');
 			$table->text('preview_url');
-            $table->boolean('is_new');
+            $table->boolean('is_new')->nullable();
             $table->string('source');
             $table->timestamps();
         });
